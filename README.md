@@ -1,8 +1,12 @@
-<p align="center"><img src="tools/icon/icon-512.png" width="128" alt="Naruto Recomp icon"></p>
+<p align="center"><img src="docs/screenshots/icone.png" width="128" alt="Ikon"></p>
 
 # Naruto x Boruto: Storm Connections Recomp
 
-An experimental native PC and Android port of the Xbox 360 game **Naruto x Boruto: Ultimate Ninja Storm Connections**, built with [ReXGlue](https://github.com/rexglue/rexglue-sdk). ReXGlue translates the game's PowerPC code into C++, which is then compiled for your machine.
+An experimental native PC and Android port of the Xbox 360 game **Naruto x Boruto: Ultimate Ninja Storm Connections** (mod of Storm Revolution), built with [ReXGlue](https://github.com/rexglue/rexglue-sdk). ReXGlue translates the game's PowerPC code into C++, which is then compiled for your machine.
+
+<div align="center">
+  <img src="docs/screenshots/luta.jpg" alt="Pertarungan" width="720">
+</div>
 
 **This repository contains no game files and no translated game code.** You need your own copy of the game. The build translates your `default.xex` and compiles it on your machine.
 
