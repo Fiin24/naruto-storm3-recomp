@@ -27,14 +27,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 RUN_SCRIPT = ROOT / "tools" / "run-radeon.sh"
 CONFIG_FILE = Path(os.environ.get("XDG_CONFIG_HOME") or Path.home() / ".config") \
-    / "naruto-storm3" / "launcher.json"
+    / "naruto-storm-connections" / "launcher.json"
 DATA_HOME = Path(os.environ.get("XDG_DATA_HOME") or Path.home() / ".local" / "share")
-ART_DIR = DATA_HOME / "naruto-storm3"
+ART_DIR = DATA_HOME / "naruto-storm-connections"
 LOG_FILE = ART_DIR / "last-run.log"
-GAME_ID = "naruto-storm3"
-LAUNCHER_ID = "naruto-storm3-launcher"
+GAME_ID = "naruto-storm-connections"
+LAUNCHER_ID = "naruto-storm-connections-launcher"
 
-TITLE = "Naruto Shippuden: Ultimate Ninja Storm 3"
+TITLE = "Naruto x Boruto: Ultimate Ninja Storm Connections"
 
 # (label, NARUTO_NATIVE_VIEW_SCALE): the game renders 720p.
 RESOLUTIONS = [("720p", 1.0), ("1080p", 1.5), ("1440p", 2.0)]
@@ -398,7 +398,7 @@ def install_menu_entries(add_to_steam=False):
 Type=Application
 Name={TITLE}
 GenericName=Fighting game
-Comment=Play with the settings from the Storm 3 launcher
+Comment=Play with the settings from the Storm Connections launcher
 Exec={launcher} --play
 Path={ROOT}
 Icon={GAME_ID}
@@ -415,7 +415,7 @@ Icon={LAUNCHER_ID}
 """)
     (applications / f"{LAUNCHER_ID}.desktop").write_text(f"""[Desktop Entry]
 Type=Application
-Name=Storm 3 Launcher
+Name=Storm Connections Launcher
 GenericName=Game launcher
 Comment=Graphics, controller and keyboard settings for {TITLE}
 Exec={launcher}

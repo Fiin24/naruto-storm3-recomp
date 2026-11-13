@@ -200,7 +200,7 @@ if (-not $NoShortcuts) {
 
 # --- 6. Done -----------------------------------------------------------------
 Step "6/6  Done"
-Write-Host "Start the game from the 'Naruto Storm 3' shortcut, or run:"
+Write-Host "Start the game from the 'Naruto x Boruto Storm Connections' shortcut, or run:"
 Write-Host "  powershell -ExecutionPolicy Bypass -File tools\play-windows.ps1"
 Write-Host "Online (experimental): the 'Online' shortcut, or add -Online -Peer <friend's IP>."
 Write-Host "After pulling updates, run install-windows.bat again to rebuild."

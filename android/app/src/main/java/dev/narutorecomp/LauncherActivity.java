@@ -97,10 +97,10 @@ public class LauncherActivity extends Activity {
         left.setPadding(0, 0, dp(16), dp(12));
         columns.addView(left, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1));
 
-        TextView series = text("NARUTO SHIPPUDEN", 15, ORANGE, true);
+        TextView series = text("NARUTO X BORUTO", 15, ORANGE, true);
         series.setLetterSpacing(0.3f);
         left.addView(series);
-        TextView title = text("ULTIMATE NINJA\nSTORM 3", 40, 0xfffff4e6, true);
+        TextView title = text("ULTIMATE NINJA STORM\nCONNECTIONS", 40, 0xfffff4e6, true);
         title.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
         title.setLineSpacing(0, 0.9f);
         title.setShadowLayer(dp(6), 0, dp(2), 0xcc000000);

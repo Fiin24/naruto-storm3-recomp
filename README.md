@@ -1,8 +1,8 @@
 <p align="center"><img src="tools/icon/icon-512.png" width="128" alt="Naruto Recomp icon"></p>
 
-# Naruto Recomp
+# Naruto x Boruto: Storm Connections Recomp
 
-An experimental native PC and Android port of the Xbox 360 game **Naruto Shippuden: Ultimate Ninja Storm 3 Full Burst**, built with [ReXGlue](https://github.com/rexglue/rexglue-sdk). ReXGlue translates the game's PowerPC code into C++, which is then compiled for your machine.
+An experimental native PC and Android port of the Xbox 360 game **Naruto x Boruto: Ultimate Ninja Storm Connections**, built with [ReXGlue](https://github.com/rexglue/rexglue-sdk). ReXGlue translates the game's PowerPC code into C++, which is then compiled for your machine.
 
 **This repository contains no game files and no translated game code.** You need your own copy of the game. The build translates your `default.xex` and compiles it on your machine.
 
@@ -59,9 +59,9 @@ The installer builds everything on your PC from source. The first run takes 30 t
 2. Asks for your extracted game folder, links it as `assets\` (no copy), and checks the game version.
 3. Clones ReXGlue into `C:\dev\rexglue-sdk`, applies the fixes in `patches\`, and builds it with the Vulkan backend.
 4. Translates `default.xex` and builds `out\build\win-amd64-release\naruto.exe`.
-5. Adds **Naruto Storm 3** shortcuts to the desktop and the Start menu, plus **Naruto Storm 3 - Online (experimental)** in the Start menu.
+5. Adds **Naruto x Boruto Storm Connections** shortcuts to the desktop and the Start menu, plus **Naruto x Boruto Storm Connections - Online (experimental)** in the Start menu.
 
-Run `install-windows.bat` again after pulling updates; finished steps are skipped and the game is rebuilt. Options: `install-windows.bat -GameDir D:\games\storm3 -SdkDir D:\rexglue-sdk`.
+Run `install-windows.bat` again after pulling updates; finished steps are skipped and the game is rebuilt. Options: `install-windows.bat -GameDir D:\games\storm-connections -SdkDir D:\rexglue-sdk`.
 
 To start the game without the shortcuts, pass [game options](#game-options) after `--`:
 
@@ -139,14 +139,14 @@ LD_LIBRARY_PATH=$HOME/rexglue-sdk/out/install/linux-amd64/lib64 \
 python3 tools/launcher/naruto_launcher.py --install
 ```
 
-This adds two entries to the app menu (on Bazzite, KDE's launcher): **Naruto Shippuden: Ultimate Ninja Storm 3** starts the game, and **Storm 3 Launcher** opens the settings. Their icons and the launcher's background come from your copy of the game (`assets/nxeart`). The launcher, which needs PySide6 (part of Bazzite and Fedora), sets:
+This adds two entries to the app menu (on Bazzite, KDE's launcher): **Naruto x Boruto: Ultimate Ninja Storm Connections** starts the game, and **Storm Connections Launcher** opens the settings. Their icons and the launcher's background come from your copy of the game (`assets/nxeart`). The launcher, which needs PySide6 (part of Bazzite and Fedora), sets:
 
 - **Graphics:** resolution (720p, 1080p or 1440p), windowed or fullscreen, screen ratio (16:9, 16:10, 21:9, 32:9, 4:3 or fill the screen; the game is made for 16:9), upscaling to the screen (FSR 1, CAS or bilinear) with sharpness, FXAA anti-aliasing, and the GPU.
 - **Controller:** the button layout for each type of controller (Xbox, PlayStation, Nintendo, and Steam Input or other). Press a button to see its row light up.
 - **Keyboard:** a key or two for every Xbox control.
 - **System:** **Add to Steam** puts the game in your Steam library, and in Game Mode.
 
-It starts the game with the native renderer (`run-radeon.sh --native-only`). `--play` starts the game with the saved settings without showing the launcher. Settings are kept in `~/.config/naruto-storm3/launcher.json`.
+It starts the game with the native renderer (`run-radeon.sh --native-only`). `--play` starts the game with the saved settings without showing the launcher. Settings are kept in `~/.config/naruto-storm-connections/launcher.json`.
 
 The game leaves a large shared-memory file in `/dev/shm` when it exits. Delete leftover `/dev/shm/xenia_memory_*` files while no game is running; otherwise they fill memory and later runs can crash.
 
@@ -156,7 +156,7 @@ An arm64 phone with Android 8 or newer and a Vulkan 1.3 GPU that supports 64-bit
 
 ### Download
 
-Get `naruto-storm3-recomp-<version>-arm64.apk` from [Releases](https://github.com/wizydeka-lang/naruto-storm3-recomp/releases) and install it (allow installing from your browser or file manager when Android asks). The APK contains no game files: you still need your own copy of the game on the phone (see [Play](#play)). If you installed an APK you built yourself, uninstall it first; the signatures differ. Uninstalling deletes `Android/data/dev.narutorecomp`, so copy your saves out of it first.
+Get `naruto-storm-connections-recomp-<version>-arm64.apk` from [Releases](https://github.com/Fiin24/naruto-x-boruto-connections-port-nativo/releases) and install it (allow installing from your browser or file manager when Android asks). The APK contains no game files: you still need your own copy of the game on the phone (see [Play](#play)). If you installed an APK you built yourself, uninstall it first; the signatures differ. Uninstalling deletes `Android/data/dev.narutorecomp`, so copy your saves out of it first.
 
 ### Build (on Linux)
 
@@ -196,7 +196,7 @@ Both players need this build, and each one sets the **other** player's IP addres
 
 | Platform | How |
 | --- | --- |
-| Windows | Start menu, **Naruto Storm 3 - Online (experimental)**. It asks for the other player's IP and shows yours. |
+| Windows | Start menu, **Naruto x Boruto Storm Connections - Online (experimental)**. It asks for the other player's IP and shows yours. |
 | Linux | `bash tools/run-radeon.sh --native-only -- --netplay=true --netplay_peer=192.168.0.4` |
 | Android | Add `netplay = true` and `netplay_peer = "192.168.0.17"` to `Android/data/dev.narutorecomp/files/user/naruto.toml`. |
 
@@ -294,7 +294,7 @@ Settings are stored in `naruto.toml` next to the executable. The first build cre
 
 ## Reporting problems
 
-Open an issue at [Issues, New issue](https://github.com/wizydeka-lang/naruto-storm3-recomp/issues/new/choose) and pick the form that fits:
+Open an issue at [Issues, New issue](https://github.com/Fiin24/naruto-x-boruto-connections-port-nativo/issues/new/choose) and pick the form that fits:
 
 | Form | For |
 | --- | --- |
@@ -318,7 +318,7 @@ Search the existing issues first; adding your details to a matching issue helps 
 
 ## Downloads
 
-The Android APK is published in [Releases](https://github.com/wizydeka-lang/naruto-storm3-recomp/releases). Like other recompilation projects, it contains the recompiled program and the game's recompiled shaders, but **no game assets**: no textures, models, sounds or videos. The game files always come from your own copy, and only the one supported version is accepted. On Windows and Linux, the game is built on your machine (the Windows installer does it for you).
+The Android APK is published in [Releases](https://github.com/Fiin24/naruto-x-boruto-connections-port-nativo/releases). Like other recompilation projects, it contains the recompiled program and the game's recompiled shaders, but **no game assets**: no textures, models, sounds or videos. The game files always come from your own copy, and only the one supported version is accepted. On Windows and Linux, the game is built on your machine (the Windows installer does it for you).
 
 ## How the project is organised
 
@@ -376,7 +376,7 @@ This port stands on the work of many people. Thank you all.
 
 ### The game
 
-*Naruto Shippuden: Ultimate Ninja Storm 3 Full Burst* was developed by [CyberConnect2](https://www.cc2.co.jp/) and published by [Bandai Namco Entertainment](https://www.bandainamcoent.com/). *Naruto* was created by Masashi Kishimoto. This is an unofficial fan project, not affiliated with or endorsed by them. Please support the official releases.
+*Naruto x Boruto: Ultimate Ninja Storm Connections* is a mod of *Naruto Shippuden: Ultimate Ninja Storm Revolution* (Xbox 360), developed by [CyberConnect2](https://www.cc2.co.jp/) and published by [Bandai Namco Entertainment](https://www.bandainamcoent.com/). *Naruto* and *Boruto* were created by Masashi Kishimoto. This is an unofficial fan project, not affiliated with or endorsed by them. Please support the official releases.
 
 ## Legal
 
