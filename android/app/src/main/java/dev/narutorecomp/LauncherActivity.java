@@ -105,7 +105,7 @@ public class LauncherActivity extends Activity {
         title.setLineSpacing(0, 0.9f);
         title.setShadowLayer(dp(6), 0, dp(2), 0xcc000000);
         left.addView(title);
-        TextView subtitle = text("Recompiled  ·  native Vulkan renderer", 13, 0xffd8cfc8, false);
+        TextView subtitle = text("Rekompilasi  ·  renderer Vulkan native", 13, 0xffd8cfc8, false);
         subtitle.setPadding(0, dp(4), 0, dp(16));
         left.addView(subtitle);
 
@@ -133,65 +133,65 @@ public class LauncherActivity extends Activity {
     }
 
     private void buildSettings(LinearLayout card) {
-        section(card, "GAME FILES");
+        section(card, "FILE GAME");
         gamePath = text("", 13, 0xfff2ebe6, false);
         gamePath.setTypeface(Typeface.MONOSPACE);
         card.addView(gamePath);
         LinearLayout buttons = new LinearLayout(this);
         buttons.setOrientation(LinearLayout.HORIZONTAL);
         buttons.setPadding(0, dp(8), 0, 0);
-        accessButton = button("Allow file access", v -> askForStorage());
+        accessButton = button("Izinkan akses file", v -> askForStorage());
         buttons.addView(accessButton, wrapWithGap());
-        buttons.addView(button("Search phone", v -> searchForGame()), wrapWithGap());
-        buttons.addView(button("Choose folder", v -> pickFolder()), wrapWithGap());
+        buttons.addView(button("Cari di HP", v -> searchForGame()), wrapWithGap());
+        buttons.addView(button("Pilih folder", v -> pickFolder()), wrapWithGap());
         card.addView(buttons);
-        card.addView(hint("The folder with default.xex and the data folder, from your own copy "
-                + "of the game. It can be anywhere on the phone or an SD card."));
+        card.addView(hint("Folder berisi default.xex dan folder data, dari salinan game "
+                + "Anda sendiri. Bisa di mana saja di HP atau kartu SD."));
 
-        section(card, "RESOLUTION");
+        section(card, "RESOLUSI");
         card.addView(new LauncherViews.Segmented(this,
                 new String[][] {{Settings.RES_720P, "720p"}, {Settings.RES_1080P, "1080p"}},
                 Settings.resolution(prefs), key -> save(Settings.RESOLUTION, key)));
-        card.addView(hint("What the game renders at. 720p is the Xbox 360's own and uses the "
-                + "least battery; 1080p is sharper."));
+        card.addView(hint("Resolusi render game. 720p adalah resolusi asli Xbox 360 dan paling "
+                + "hemat baterai; 1080p lebih tajam."));
 
         section(card, "ANTI-ALIASING");
         card.addView(new LauncherViews.Segmented(this,
-                new String[][] {{"off", "Off"}, {"fxaa", "FXAA"}},
+                new String[][] {{"off", "Mati"}, {"fxaa", "FXAA"}},
                 Settings.fxaa(prefs) ? "fxaa" : "off",
                 key -> save(Settings.FXAA, key.equals("fxaa"))));
-        card.addView(hint("FXAA smooths jagged edges for a little GPU time."));
+        card.addView(hint("FXAA menghaluskan tepi kasar dengan sedikit waktu GPU."));
 
-        section(card, "CHARACTERS");
+        section(card, "KARAKTER");
         card.addView(new LauncherViews.Segmented(this,
-                new String[][] {{"story", "Unlock in story"}, {"all", "Unlock all"}},
+                new String[][] {{"story", "Buka di cerita"}, {"all", "Buka semua"}},
                 Settings.unlockAll(prefs) ? "all" : "story",
                 key -> save(Settings.UNLOCK_ALL, key.equals("all"))));
-        card.addView(hint("Unlock all makes every character playable right away. The game "
-                + "saves them as unlocked, so they stay unlocked."));
+        card.addView(hint("Buka semua membuat semua karakter bisa langsung dimainkan. Game "
+                + "menyimpannya sebagai terbuka, jadi tetap terbuka."));
 
-        section(card, "SCREEN");
-        card.addView(text("Fill screen", 15, 0xfff2ebe6, true));
-        card.addView(hint("The picture always fills your phone's whole screen, edge to edge."));
+        section(card, "LAYAR");
+        card.addView(text("Isi penuh layar", 15, 0xfff2ebe6, true));
+        card.addView(hint("Gambar selalu mengisi seluruh layar HP, dari tepi ke tepi."));
 
-        section(card, "PERFORMANCE");
-        card.addView(text("30 FPS, battery saving", 15, 0xfff2ebe6, true));
-        card.addView(hint("The game runs at its own 30 frames a second. The screen drops to the "
-                + "lowest refresh rate that fits and the phone holds steady clocks, so frames "
-                + "stay even without wasting power."));
+        section(card, "PERFORMA");
+        card.addView(text("30 FPS, hemat baterai", 15, 0xfff2ebe6, true));
+        card.addView(hint("Game berjalan di 30 frame per detik. Layar turun ke refresh rate "
+                + "terendah yang muat, dan HP menjaga clock stabil, sehingga frame tetap "
+                + "rata tanpa buang daya."));
 
-        section(card, "XBOX 360 CONTROLLER");
+        section(card, "KONTROL XBOX 360");
         card.addView(new LauncherViews.Segmented(this,
-                new String[][] {{"on", "On-screen"}, {"off", "Off"}},
+                new String[][] {{"on", "Di layar"}, {"off", "Mati"}},
                 Settings.touch(prefs) ? "on" : "off",
                 key -> {
                     save(Settings.TOUCH, key.equals("on"));
                     preview.setVisibility(key.equals("on") ? View.VISIBLE : View.INVISIBLE);
                 }));
-        card.addView(hint("A Bluetooth or USB controller works too. In the game, the ◐ button "
-                + "at the bottom hides the on-screen one."));
-        card.addView(slider("Size", Settings.touchSize(prefs), 0.6f, 1.4f, Settings.TOUCH_SIZE));
-        card.addView(slider("Opacity", Settings.touchOpacity(prefs), 0.2f, 1.0f, Settings.TOUCH_OPACITY));
+        card.addView(hint("Kontroler Bluetooth atau USB juga bisa dipakai. Di dalam game, tombol "
+                + "◐ di bagian bawah menyembunyikan yang di layar."));
+        card.addView(slider("Ukuran", Settings.touchSize(prefs), 0.6f, 1.4f, Settings.TOUCH_SIZE));
+        card.addView(slider("Opasitas", Settings.touchOpacity(prefs), 0.2f, 1.0f, Settings.TOUCH_OPACITY));
 
         // The layout as it will be over the game.
         FrameLayout frame = new FrameLayout(this);
@@ -328,21 +328,21 @@ public class LauncherActivity extends Activity {
         File game = gameFolder();
         boolean ready = access && GameFiles.isGameFolder(game);
         accessButton.setVisibility(access ? View.GONE : View.VISIBLE);
-        gamePath.setText(game != null ? game.getAbsolutePath() : "Not found yet");
+        gamePath.setText(game != null ? game.getAbsolutePath() : "Belum ditemukan");
         if (!access) {
-            status.setText("Allow access to files so the game can be found.");
+            status.setText("Izinkan akses file agar game bisa ditemukan.");
         } else if (searching) {
-            status.setText("Looking for the game on your phone…");
+            status.setText("Mencari game di HP Anda…");
         } else if (!ready) {
-            status.setText("Game not found: choose the folder with default.xex.");
+            status.setText("Game tidak ditemukan: pilih folder berisi default.xex.");
         } else {
-            status.setText("Ready.");
+            status.setText("Siap.");
         }
         play.setEnabled(ready);
         play.invalidate();
-        summary.setText(Settings.resolution(prefs) + "   ·   Fill screen   ·   "
-                + (Settings.fxaa(prefs) ? "FXAA" : "No AA") + "   ·   30 FPS"
-                + (Settings.unlockAll(prefs) ? "   ·   All characters" : ""));
+        summary.setText(Settings.resolution(prefs) + "   ·   Penuh layar   ·   "
+                + (Settings.fxaa(prefs) ? "FXAA" : "Tanpa AA") + "   ·   30 FPS"
+                + (Settings.unlockAll(prefs) ? "   ·   Semua karakter" : ""));
         if (ready && !game.equals(artLoadedFor)) {
             artLoadedFor = game;
             new Thread(() -> {
@@ -419,17 +419,17 @@ public class LauncherActivity extends Activity {
         }
         File picked = GameFiles.fromTreeUri(data.getData());
         if (picked == null) {
-            status.setText("That folder isn't on the phone or an SD card.");
-            return;
-        }
-        // The game's folder itself, or one a few levels above it.
-        File game = GameFiles.isGameFolder(picked) ? picked : GameFiles.findIn(picked, 3);
-        if (game == null) {
-            prefs.edit().putString(Settings.GAME_DIR, picked.getAbsolutePath()).apply();
-            refresh();
-            status.setText("No default.xex with a data folder in " + picked.getName() + ".");
-            return;
-        }
+                status.setText("Folder itu tidak ada di HP atau kartu SD.");
+                return;
+            }
+            // Folder game itu sendiri, atau beberapa tingkat di atasnya.
+            File game = GameFiles.isGameFolder(picked) ? picked : GameFiles.findIn(picked, 3);
+            if (game == null) {
+                prefs.edit().putString(Settings.GAME_DIR, picked.getAbsolutePath()).apply();
+                refresh();
+                status.setText("Tidak ada default.xex dengan folder data di " + picked.getName() + ".");
+                return;
+            }
         prefs.edit().putString(Settings.GAME_DIR, game.getAbsolutePath()).apply();
         refresh();
     }
