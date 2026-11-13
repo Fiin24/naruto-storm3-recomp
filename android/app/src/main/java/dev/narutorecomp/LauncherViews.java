@@ -127,7 +127,7 @@ final class LauncherViews {
             density = context.getResources().getDisplayMetrics().density;
             setFocusable(true);
             setClickable(true);
-            setContentDescription("Play");
+            setContentDescription("Main");
         }
 
         @Override
@@ -186,7 +186,7 @@ final class LauncherViews {
             paint.setLetterSpacing(0.25f);
             paint.setTextAlign(Paint.Align.CENTER);
             float textX = (cx + r + w - slant) / 2 + h * 0.1f;
-            canvas.drawText("PLAY", textX, cy - (paint.ascent() + paint.descent()) / 2, paint);
+            canvas.drawText("MAIN", textX, cy - (paint.ascent() + paint.descent()) / 2, paint);
         }
     }
 
