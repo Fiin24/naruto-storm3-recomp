@@ -24,13 +24,18 @@ jobs:
           java-version: '17'
           cache: gradle
 
-      - name: Siapkan Android SDK
-        uses: android-actions/setup-android@v3
-        with:
-          packages: |
-            platform-tools
-            platforms;android-35
-            build-tools;35.0.0
+      - name: Siapkan Android SDK runner
+        run: |
+          set -euxo pipefail
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          test -d "$SDK"
+          SDKMANAGER="$(find "$SDK" /usr/local/lib/android/sdk -type f -name sdkmanager -perm -111 2>/dev/null | head -n 1 || true)"
+          test -n "$SDKMANAGER" || { echo "sdkmanager tidak ditemukan di runner"; exit 1; }
+          yes | "$SDKMANAGER" --licenses >/dev/null || true
+          "$SDKMANAGER" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+          echo "ANDROID_HOME=$SDK" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$SDK" >> "$GITHUB_ENV"
+          echo "PATH=$SDK/platform-tools:$SDK/build-tools/35.0.0:$PATH" >> "$GITHUB_ENV"
 
       - name: Build APK launcher-only
         working-directory: android
