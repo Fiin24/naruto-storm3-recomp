@@ -441,9 +441,10 @@ public class LauncherActivity extends Activity {
             refresh();
             return;
         }
-        // Written now: the game's process reads the settings as it starts.
+        // This public APK is launcher-only until the matching native game
+        // libraries are supplied. Do not open the game activity without them.
         prefs.edit().commit();
-        startActivity(new Intent(this, NarutoActivity.class));
+        status.setText("Folder game valid. Build ini hanya launcher; native game belum tersedia.");
     }
 
     // A controller's A picks the focused setting, Start plays.

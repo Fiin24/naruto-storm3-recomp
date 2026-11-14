@@ -7,7 +7,6 @@ def rexglueSdk = file(providers.gradleProperty('rexglueSdk').getOrElse("${home}/
 def androidNdk = file(providers.gradleProperty('androidNdk')
         .orElse(providers.environmentVariable('ANDROID_NDK_HOME'))
         .getOrElse("${home}/Android/android-ndk-r30"))
-def sdlJava = new File(rexglueSdk, 'thirdparty/sdl3/android-project/app/src/main/java')
 def sdkLibs = new File(rexglueSdk, 'out/install/android-arm64/lib')
 def gameBuild = rootProject.file('../out/build/android-arm64-release')
 def stagedLibs = layout.buildDirectory.dir('staged/jniLibs')
@@ -70,8 +69,6 @@ android {
 
     sourceSets {
         main {
-            java.srcDirs += sdlJava
-            jniLibs.srcDirs = [stagedLibs]
             assets.srcDirs = [stagedAssets]
             // src/main/res, with the icon made from the game's art over the
             // default one.
@@ -161,5 +158,9 @@ def stageIcons = tasks.register('stageIcons') {
 }
 
 tasks.named('preBuild') {
-    dependsOn stageNativeLibs, stageAssets, stageIcons
+    dependsOn stageAssets, stageIcons
 }
+
+// Launcher-only build: the game native libraries are intentionally omitted.
+// The APK can select and validate a user-owned game folder, but cannot run the
+// recompilation until libmain.so and the matching renderer are supplied.

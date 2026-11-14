@@ -1,4 +1,4 @@
-name: Build APK
+name: Build APK Launcher
 
 on:
   push:
@@ -10,10 +10,9 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-launcher:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
-
+    timeout-minutes: 25
     steps:
       - name: Ambil source
         uses: actions/checkout@v4
@@ -28,50 +27,29 @@ jobs:
       - name: Siapkan Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Pasang SDK, build-tools, dan NDK
+      - name: Pasang Android SDK platform
         run: |
-          yes | sdkmanager --licenses >/dev/null || true
-          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" "ndk;30.0.16248370"
-          echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/30.0.16248370" >> "$GITHUB_ENV"
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
-      - name: Periksa input native sebelum build
-        run: |
-          test -f android/gradlew || { echo "android/gradlew tidak ditemukan"; exit 1; }
-          test -d out/build/android-arm64-release || {
-            echo "out/build/android-arm64-release belum ada. libmain.so harus dibangun dari source recompilation terlebih dahulu."
-            exit 1
-          }
-          test -f out/build/android-arm64-release/libmain.so || {
-            echo "libmain.so belum ada. APK game belum dapat dibuat tanpa hasil recompilation native." 
-            exit 1
-          }
-          test -f out/shaders/naruto_shaders.bin || {
-            echo "out/shaders/naruto_shaders.bin belum ada. Jalankan tools/build-shaders.py pada build host." 
-            exit 1
-          }
-
-      - name: Build APK debug
+      - name: Build APK launcher-only
         working-directory: android
         run: |
           chmod +x gradlew
           ./gradlew --stacktrace --no-daemon assembleDebug
 
       - name: Upload APK
-        if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: naruto-storm-connections-debug
+          name: naruto-storm-connections-launcher-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
 
-      - name: Simpan log jika gagal
+      - name: Simpan laporan jika gagal
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: build-log
-          path: |
-            android/**/*.log
-            android/**/build/reports/**
+          name: launcher-build-reports
+          path: android/**/build/reports/**
           if-no-files-found: ignore
           retention-days: 7
