@@ -26,10 +26,11 @@ jobs:
 
       - name: Siapkan Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Pasang Android SDK platform
-        run: |
-          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+        with:
+          packages: |
+            platform-tools
+            platforms;android-35
+            build-tools;35.0.0
 
       - name: Build APK launcher-only
         working-directory: android
