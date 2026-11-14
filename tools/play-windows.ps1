@@ -18,7 +18,7 @@ $assets = (Join-Path $ProjectRoot "assets")
 
 function Show-Error($text) {
     Add-Type -AssemblyName System.Windows.Forms
-    [System.Windows.Forms.MessageBox]::Show($text, "Naruto Storm 3") | Out-Null
+    [System.Windows.Forms.MessageBox]::Show($text, "Naruto x Boruto Storm Connections") | Out-Null
     exit 1
 }
 if (-not (Test-Path $exe)) { Show-Error "naruto.exe not found. Run install-windows.bat first." }
@@ -49,7 +49,7 @@ if ($Online) {
         $Peer = [Microsoft.VisualBasic.Interaction]::InputBox(
             "Online mode is experimental.`n`nEnter the other player's IP address (LAN or Tailscale)." +
             "`nLeave it empty to find games on your local network only.`n`nYour IP: $mine",
-            "Naruto Storm 3 - Online", $last)
+            "Naruto x Boruto Storm Connections - Online", $last)
     }
     $Peer = $Peer.Trim()
     New-Item -ItemType Directory -Force -Path (Split-Path $saved) | Out-Null

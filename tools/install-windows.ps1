@@ -44,7 +44,7 @@ function Find-VisualStudio {
     return $null
 }
 
-Write-Host "Naruto Storm 3 Recomp - Windows installer" -ForegroundColor Yellow
+Write-Host "Naruto x Boruto Storm Connections - Windows installer" -ForegroundColor Yellow
 Write-Host "This builds everything from source. The first run takes 30-90 minutes"
 Write-Host "and needs about 25 GB of free disk space and 16 GB of RAM."
 
@@ -126,7 +126,7 @@ if (-not (Test-Path (Join-Path $assets "default.xex"))) {
     if (-not $GameDir) {
         Add-Type -AssemblyName System.Windows.Forms
         $dialog = New-Object System.Windows.Forms.FolderBrowserDialog
-        $dialog.Description = "Choose your extracted Naruto Storm 3 Full Burst folder (the one with default.xex)"
+        $dialog.Description = "Choose your extracted Naruto x Boruto Storm Connections folder (the one with default.xex)"
         $dialog.ShowNewFolderButton = $false
         if ($dialog.ShowDialog() -ne [System.Windows.Forms.DialogResult]::OK) { Fail "No game folder chosen." }
         $GameDir = $dialog.SelectedPath
@@ -180,12 +180,12 @@ if (-not $NoShortcuts) {
     $shell = New-Object -ComObject WScript.Shell
     $play = Join-Path $PSScriptRoot "play-windows.ps1"
     $icon = "$exe,0"
-    $startMenu = Join-Path ([Environment]::GetFolderPath("Programs")) "Naruto Storm 3 Recomp"
+    $startMenu = Join-Path ([Environment]::GetFolderPath("Programs")) "Naruto x Boruto Storm Connections"
     New-Item -ItemType Directory -Force -Path $startMenu | Out-Null
     $links = @(
-        @{ Path = (Join-Path ([Environment]::GetFolderPath("Desktop")) "Naruto Storm 3.lnk"); Args = "" },
-        @{ Path = (Join-Path $startMenu "Naruto Storm 3.lnk"); Args = "" },
-        @{ Path = (Join-Path $startMenu "Naruto Storm 3 - Online (experimental).lnk"); Args = " -Online" }
+        @{ Path = (Join-Path ([Environment]::GetFolderPath("Desktop")) "Naruto x Boruto Storm Connections.lnk"); Args = "" },
+        @{ Path = (Join-Path $startMenu "Naruto x Boruto Storm Connections.lnk"); Args = "" },
+        @{ Path = (Join-Path $startMenu "Naruto x Boruto Storm Connections - Online (experimental).lnk"); Args = " -Online" }
     )
     foreach ($l in $links) {
         $s = $shell.CreateShortcut($l.Path)

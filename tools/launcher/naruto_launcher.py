@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Launcher for the Naruto Storm 3 recompilation.
+"""Launcher for Naruto x Boruto: Storm Connections recompilation.
 
 Sets up how the game looks (resolution, upscaling, anti-aliasing) and is
 controlled (controller buttons per kind of controller, keyboard keys), then
 starts it with the native renderer through tools/run-radeon.sh. Settings are
-kept in ~/.config/naruto-storm3/launcher.json.
+kept in ~/.config/naruto-storm-connections/launcher.json.
 
   python3 tools/launcher/naruto_launcher.py            the launcher
   python3 tools/launcher/naruto_launcher.py --play     start the game right away
@@ -307,7 +307,7 @@ def make_game_icon(size):
     font.setLetterSpacing(QtGui.QFont.PercentageSpacing, 104)
     text = QtGui.QPainterPath()
     metrics = QtGui.QFontMetricsF(font)
-    label = "STORM 3"
+    label = "STORM CONNECTIONS"
     text.addText(QtCore.QPointF(size / 2 - metrics.horizontalAdvance(label) / 2,
                                 tile.bottom() - size * 0.075), font, label)
     painter.setPen(QtGui.QPen(INK, size * 0.035, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
@@ -634,7 +634,7 @@ class Launcher(QtWidgets.QWidget):
         self.pads = sdl_pad.Pads()
         self.pad_held = set()
         self.background = load_art("background.jpg")
-        self.setWindowTitle("Storm 3 Launcher")
+        self.setWindowTitle("Storm Connections Launcher")
         self.setMinimumSize(1060, 660)
         self.resize(1220, 720)
         self.setStyleSheet(STYLE)
@@ -672,7 +672,7 @@ class Launcher(QtWidgets.QWidget):
         kicker.setFont(display_font(22, QtGui.QFont.ExtraBold))
         kicker.setStyleSheet("color: #ff9d45; letter-spacing: 6px;")
         layout.addWidget(kicker)
-        title = QtWidgets.QLabel("ULTIMATE NINJA\nSTORM 3")
+        title = QtWidgets.QLabel("ULTIMATE NINJA STORM\nCONNECTIONS")
         title.setFont(display_font(64))
         title.setStyleSheet("color: #fff7ee; line-height: 90%;")
         shadow = QtWidgets.QGraphicsDropShadowEffect(blurRadius=24, offset=QtCore.QPointF(0, 4))
@@ -1205,7 +1205,7 @@ def main():
         return
     QtWidgets.QApplication.setDesktopFileName(LAUNCHER_ID)
     app = QtWidgets.QApplication(sys.argv)
-    app.setApplicationName("Storm 3 Launcher")
+    app.setApplicationName("Storm Connections Launcher")
     font = QtGui.QFont("Noto Sans")
     font.setPixelSize(14)
     app.setFont(font)
