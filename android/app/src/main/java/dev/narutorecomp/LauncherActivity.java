@@ -441,10 +441,16 @@ public class LauncherActivity extends Activity {
             refresh();
             return;
         }
-        // This public APK is launcher-only until the matching native game
-        // libraries are supplied. Do not open the game activity without them.
         prefs.edit().commit();
-        status.setText("Folder game valid. Build ini hanya launcher; native game belum tersedia.");
+        // Buka game jika native lib ada; jika tidak, tampilkan pesan launcher-only
+        try {
+            Class<?> gameActivity = Class.forName("dev.narutorecomp.NarutoActivity");
+            startActivity(new Intent(this, gameActivity));
+        } catch (ClassNotFoundException e) {
+            status.setText("Native game belum tersedia. Silakan gunakan versi full.");
+        } catch (Exception e) {
+            status.setText("Gagal memulai game: " + e.getMessage());
+        }
     }
 
     // A controller's A picks the focused setting, Start plays.
