@@ -44,17 +44,5 @@
             </intent-filter>
         </activity>
 
-        <!-- In a process of its own: the game's native state starts once per
-             process, so each play gets a fresh one. -->
-
-        <activity android:name=".NarutoActivity"
-            android:label="@string/app_name"
-            android:alwaysRetainTaskState="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="sensorLandscape"
-            android:configChanges="layoutDirection|locale|grammaticalGender|fontScale|fontWeightAdjustment|orientation|uiMode|screenLayout|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
-            android:preferMinimalPostProcessing="true"
-            android:process=":game"
-            android:exported="false" />
     </application>
 </manifest>

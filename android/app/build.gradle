@@ -70,6 +70,7 @@ android {
     sourceSets {
         main {
             assets.srcDirs = [stagedAssets]
+            java.exclude('dev/narutorecomp/NarutoActivity.java')
             // src/main/res, with the icon made from the game's art over the
             // default one.
             res.srcDirs = [stagedRes]
