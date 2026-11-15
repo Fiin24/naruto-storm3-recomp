@@ -11,10 +11,7 @@
     <uses-feature android:name="android.hardware.usb.host" android:required="false" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <!-- Online play (netplay): the game's own sockets and the session lobby. -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- The game's files are wherever the user copied them, so the launcher
-         reads the whole shared storage ("All files access" on Android 11+). -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
@@ -32,7 +29,7 @@
         android:appCategory="game"
         android:isGame="true">
 
-        <activity android:name=".LauncherActivity"
+        <activity android:name="dev.narutorecomp.LauncherActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Material.NoActionBar.Fullscreen"
             android:screenOrientation="sensorLandscape"
@@ -44,7 +41,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".GameActivity"
+        <activity android:name="org.stormconnections.port.GameActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorLandscape"
             android:exported="false"

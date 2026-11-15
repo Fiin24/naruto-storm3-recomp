@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Naruto Recomp</string>
+    <string name="menu_continue">Continue</string>
+    <string name="menu_hide_touch">Hide touch controls</string>
+    <string name="menu_show_touch">Show touch controls</string>
+    <string name="menu_exit">Exit</string>
 </resources>
