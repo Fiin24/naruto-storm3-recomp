@@ -44,5 +44,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".GameActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape"
+            android:exported="false"
+            android:process=":game" />
+
     </application>
 </manifest>
