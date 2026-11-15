@@ -98,7 +98,7 @@ if (hasNativeLibs) {
     tasks.named('preBuild') { dependsOn stageNativeLibs }
 } else {
     def createJniLibsDir = tasks.register('createJniLibsDir') {
-        doLast { stagedLibs.map { it.dir('arm64-v8a') }.each { it.mkdirs() } }
+        doLast { stagedLibs.get().dir('arm64-v8a').asFile.mkdirs() }
     }
     tasks.named('preBuild') { dependsOn createJniLibsDir }
 }
