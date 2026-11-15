@@ -12,6 +12,12 @@ def gameBuild = rootProject.file('../out/build/android-arm64-release')
 def stagedLibs = layout.buildDirectory.dir('staged/jniLibs')
 def stagedAssets = layout.buildDirectory.dir('staged/assets')
 def stagedRes = layout.buildDirectory.dir('staged/res')
+// The launcher-only CI build has no game or ReXGlue native libraries. Only
+// compile the SDL-backed activity when all native runtime components exist.
+def hasNativeLibs = file(gameBuild).exists()
+        && file(gameBuild, 'libmain.so').exists()
+        && file(sdkLibs, 'librexruntime.so').exists()
+        && file(sdkLibs, 'librexgpu-xenos.so').exists()
 // -PpublicRelease=true: an APK for publishing. It leaves out the icon made from
 // the game's box art. It keeps the shader cache: the native renderer cannot
 // compile shaders on the phone, so without it nothing is drawn.
@@ -63,6 +69,11 @@ android {
 
     sourceSets {
         main {
+            java {
+                if (!hasNativeLibs) {
+                    exclude 'dev/narutorecomp/NarutoActivity.java'
+                }
+            }
             assets.srcDirs = ['src/main/assets']
             jniLibs.srcDirs = ['src/main/jniLibs']
             res.srcDirs = [stagedRes]
@@ -80,10 +91,6 @@ android {
         abortOnError = false
     }
 }
-
-// The native libraries come from the CMake builds (see README.md), not from
-// Gradle: the game, the SDK runtime and GPU plugin, and the NDK's C++ library.
-def hasNativeLibs = file(gameBuild).exists() && file(gameBuild, 'libmain.so').exists() && file(sdkLibs, 'librexruntime.so').exists() && file(sdkLibs, 'librexgpu-xenos.so').exists()
 
 // Stage native libraries only if they exist
 if (hasNativeLibs) {
