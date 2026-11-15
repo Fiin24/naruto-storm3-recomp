@@ -71,9 +71,8 @@ android {
 
     packaging {
         jniLibs {
-            // Extract the libraries to nativeLibraryDir: the runtime loads the
-            // GPU plugin from there by path.
             useLegacyPackaging = true
+            keepDebugSymbols += ['**/*.so']
         }
     }
 
