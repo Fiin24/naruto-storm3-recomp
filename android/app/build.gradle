@@ -63,9 +63,8 @@ android {
 
     sourceSets {
         main {
-            assets.srcDirs = [stagedAssets]
-            // src/main/res, with the icon made from the game's art over the
-            // default one.
+            assets.srcDirs = ['src/main/assets']
+            jniLibs.srcDirs = ['src/main/jniLibs']
             res.srcDirs = [stagedRes]
         }
     }
